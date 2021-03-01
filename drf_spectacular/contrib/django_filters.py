@@ -63,7 +63,7 @@ class DjangoFilterExtension(OpenApiFilterExtension):
             filters.IsoDateTimeFromToRangeFilter: OpenApiTypes.DATETIME,
             filters.DateTimeFromToRangeFilter: OpenApiTypes.DATETIME,
         }
-        if isinstance(filter_field, tuple(unambiguous_mapping)):
+        if isinstance(filter_field, tuple(unambiguous_mapping)) and filter_field.__class__ in unambiguous_mapping:
             schema = build_basic_type(unambiguous_mapping[filter_field.__class__])
         elif isinstance(filter_field, (filters.NumberFilter, filters.NumericRangeFilter)):
             # NumberField is underspecified by itself. try to find the
